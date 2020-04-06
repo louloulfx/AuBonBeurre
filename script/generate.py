@@ -2,9 +2,10 @@ import json
 import calendar
 import time
 import random
+import os 
 
+id_unite = [os.getenv('UNITE')]
 starttime = time.time()
-id_unite = [1, 2, 3, 4, 5]
 id_automate = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 id_type_automate = ["0", "1", "2", "3", "4", "5",
                     "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
