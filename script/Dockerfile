@@ -1,6 +1,8 @@
 FROM python:3.7
 
-WORKDIR /var/www/app
+WORKDIR /app
+
+RUN mkdir /app/jsonFiles
 
 COPY generate.py .
 
