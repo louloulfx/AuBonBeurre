@@ -1,27 +1,47 @@
-<template>
-  <div>
-    Bonsoir
-    <line-chart :chart-data="datacollection" />
-  </div>
-</template>
 <script>
-import LineChart from "@/components/Chart";
+import { Line } from "vue-chartjs";
 
 export default {
-  components: {
-    LineChart
+  extends: Line,
+  name: "LineChart",
+  props: {
+    chartData: {
+      type: Object,
+      required: false
+    }
   },
   data() {
-    return { datacollection: null, label: [0], data: [0] };
+    return {
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              },
+              gridLines: {
+                display: true
+              }
+            }
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false
+              }
+            }
+          ]
+        },
+        legend: {
+          display: true
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    };
   },
-  created() {
-    for (let i = 1; i < 61; i++) {
-      this.label.push(i);
-      this.data.push(this.getRandomInt());
-      console.log(this.label[i]);
-    }
-
-    this.fillData();
+  mounted() {
+    this.renderChart(this.chartData, this.options);
   },
   methods: {
     fillData() {
