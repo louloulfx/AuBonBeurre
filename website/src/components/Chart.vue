@@ -8,8 +8,8 @@ export default {
   props: {
     chartData: {
       type: Object,
-      required: false,
-    },
+      required: false
+    }
   },
   data() {
     return {
@@ -18,33 +18,35 @@ export default {
           yAxes: [
             {
               ticks: {
-                beginAtZero: true,
+                beginAtZero: true
               },
               gridLines: {
-                display: true,
-              },
-            },
+                display: true
+              }
+            }
           ],
           xAxes: [
             {
               gridLines: {
-                display: false,
-              },
-            },
-          ],
+                display: false
+              }
+            }
+          ]
         },
         legend: {
           display: true,
           position: "top",
-          labels: {},
+          labels: {
+            fontSize: 15
+          }
         },
         responsive: true,
-        maintainAspectRatio: false,
-      },
+        maintainAspectRatio: false
+      }
     };
   },
   mounted() {
     this.renderChart(this.chartData, this.options);
-  },
+  }
 };
 </script>
