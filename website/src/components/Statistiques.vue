@@ -5,6 +5,7 @@
         v-model="data1"
         :options="['data1', 'data2', 'data3', 'data4', 'data5', 'data6']"
         @input="random()"
+        :clearable="false"
       ></v-select>
     </div>
     <line-chart :styles="myStyles" :chart-data="datacollection" />
