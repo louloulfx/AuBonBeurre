@@ -14,10 +14,9 @@ class ClientThread(threading.Thread):
         self.ip = ip
         self.port = port
         self.clientsocket = clientsocket
-        # print("[+] Nouveau thread pour %s %s" % (self.ip, self.port, ))
 
     def run(self):
-        print("Connexion de %s:%s" % (self.ip, self.port, ))
+        # print("Connexion de %s:%s" % (self.ip, self.port, ))
 
         r = self.clientsocket.recv(999999).decode()
         pathFile = pathlib.Path().joinpath(pathlib.Path().absolute(),
@@ -30,7 +29,6 @@ class ClientThread(threading.Thread):
                                                  password='ippon')
             cursor = connection.cursor()
             try:
-                # Insertion des donnees de l'unitee
                 for automate in data:
                     sql_insert_automate = """INSERT INTO automates(
                         nb_unite,
@@ -72,8 +70,8 @@ class ClientThread(threading.Thread):
                 if connection != None:
                     connection.close()
 
-        self.clientsocket.send('Fichier recu par le collecteur'.encode())
-        print("Deconnexion de %s:%s" % (self.ip, self.port, ))
+        self.clientsocket.send('File received by the server'.encode())
+        print("Received file from %s:%s" % (self.ip, self.port, ))
 
 
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -82,7 +80,7 @@ tcpsock.bind(("", 1111))
 
 while True:
     tcpsock.listen(10)
-    print("En ecoute...")
+    print("Listening...")
     (clientsocket, (ip, port)) = tcpsock.accept()
     newthread = ClientThread(ip, port, clientsocket)
     newthread.start()
