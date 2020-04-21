@@ -1,6 +1,6 @@
 Pour être capable d'utiliser le docker mis en place, et de se servir du server Nginx, il va falloir taper ces commandes dans un terminal
 
-docker build -f Dockerfile-prod -t (le nom de l'app):prod
+docker build -f Dockerfile-prod -t (le nom de l'app):prod .
 
 Ensuite, une fois que cette commande est réalisé, il faudra taper celle-ci:
 
