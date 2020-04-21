@@ -1,28 +1,88 @@
-import socket                   # Import socket module
+import socket
+import threading
+import pathlib
+import json
+import mysql.connector
+from mysql.connector import Error
 
-port = 60000                    # Reserve a port for your service.
-s = socket.socket()             # Create a socket object
-host = socket.gethostname()     # Get local machine name
-s.bind((host, port))            # Bind to the port
-s.listen(5)                     # Now wait for client connection.
 
-print ('Server listening....')
+class ClientThread(threading.Thread):
+
+    def __init__(self, ip, port, clientsocket):
+
+        threading.Thread.__init__(self)
+        self.ip = ip
+        self.port = port
+        self.clientsocket = clientsocket
+        # print("[+] Nouveau thread pour %s %s" % (self.ip, self.port, ))
+
+    def run(self):
+        print("Connexion de %s:%s" % (self.ip, self.port, ))
+
+        r = self.clientsocket.recv(999999).decode()
+        pathFile = pathlib.Path().joinpath(pathlib.Path().absolute(),
+                                           '/home/valentinguibert/Documents/Repos/AuBonBeurre/jsonFiles', r)
+        with open(str(pathFile), 'rb') as json_file:
+            data = json.load(json_file)
+            connection = mysql.connector.connect(host='localhost',
+                                                 database='devops',
+                                                 user='root',
+                                                 password='ippon')
+            cursor = connection.cursor()
+            try:
+                # Insertion des donnees de l'unitee
+                for automate in data:
+                    sql_insert_automate = """INSERT INTO automates(
+                        nb_unite,
+                        nb_automate,
+                        type,
+                        temp_cuve,
+                        temp_ext,
+                        poids_lait,
+                        poids_produit,
+                        ph,
+                        kplus,
+                        nacl,
+                        salmonelle,
+                        ecoli,
+                        listeria,
+                        date
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+                    cursor.execute(sql_insert_automate, (
+                        automate['nb_unite'],
+                        automate['nb_automate'],
+                        automate['type'],
+                        automate['temp_cuve'],
+                        automate['temp_ext'],
+                        automate['poids_lait'],
+                        automate['poids_produit'],
+                        automate['ph'],
+                        automate['kplus'],
+                        automate['nacl'],
+                        automate['salmonelle'],
+                        automate['ecoli'],
+                        automate['listeria'],
+                        automate['date']
+                    ))
+                connection.commit()
+                print('Donnees inserees')
+            finally:
+                if cursor != None:
+                    cursor.close()
+                if connection != None:
+                    connection.close()
+
+        self.clientsocket.send('Fichier recu par le collecteur'.encode())
+        print("Deconnexion de %s:%s" % (self.ip, self.port, ))
+
+
+tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+tcpsock.bind(("", 1111))
 
 while True:
-    conn, addr = s.accept()     # Establish connection with client.
-    print ('Got connection from', addr)
-    data = conn.recv(1024)
-    print('Server received', repr(data))
-
-    filename='mytext.txt'
-    f = open(filename,'rb')
-    l = f.read(1024)
-    while (l):
-       conn.send(l)
-       print('Sent ',repr(l))
-       l = f.read(1024)
-    f.close()
-
-    print('Done sending')
-    conn.send('Thank you for connecting')
-    conn.close()
+    tcpsock.listen(10)
+    print("En ecoute...")
+    (clientsocket, (ip, port)) = tcpsock.accept()
+    newthread = ClientThread(ip, port, clientsocket)
+    newthread.start()
