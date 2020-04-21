@@ -43,10 +43,10 @@ while True:
         with open('jsonFiles/'+name, "w") as file:
             json.dump(data, file)
 
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("", 1111))
-    s.send(name.encode())
-    response = s.recv(100).decode()
-    print(response)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(("", 1111))
+        s.send(name.encode())
+        response = s.recv(100).decode()
+        print(response)
 
-time.sleep(60.0 - ((time.time() - starttime) % 60.0))
+    time.sleep(60.0 - ((time.time() - starttime) % 60.0))
