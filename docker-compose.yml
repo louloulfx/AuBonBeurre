@@ -1,0 +1,37 @@
+version: '3'
+services:
+  unite1: 
+    container_name: unite1
+    build: ./script/
+    environment: 
+      - UNITE=1
+
+  unite2: 
+    container_name: unite2
+    build: ./script/
+    environment: 
+      - UNITE=2
+
+  unite3: 
+    container_name: unite3
+    build: ./script/
+    environment: 
+      - UNITE=3
+
+  unite4: 
+    container_name: unite4
+    build: ./script/
+    environment: 
+      - UNITE=4
+
+  unite5: 
+    container_name: unite5
+    build: ./script/
+    environment: 
+      - UNITE=5
+
+  unite6: 
+    container_name: unite6
+    build: ./script/
+    environment: 
+      - UNITE=6
