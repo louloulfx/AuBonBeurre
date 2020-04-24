@@ -61,7 +61,7 @@ class ClientThread(threading.Thread):
                         automate['date']
                     ))
                 connection.commit()
-                print('Donnees inserees')
+                print('Data inserted')
             finally:
                 if cursor != None:
                     cursor.close()
