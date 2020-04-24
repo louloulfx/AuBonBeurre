@@ -16,17 +16,15 @@ class ClientThread(threading.Thread):
         self.clientsocket = clientsocket
 
     def run(self):
-        # print("Connexion de %s:%s" % (self.ip, self.port, ))
-
         r = self.clientsocket.recv(999999).decode()
         pathFile = pathlib.Path().joinpath(pathlib.Path().absolute(),
                                            '/home/valentinguibert/Documents/Repos/AuBonBeurre/jsonFiles', r)
         with open(str(pathFile), 'rb') as json_file:
             data = json.load(json_file)
-            connection = mysql.connector.connect(host='localhost',
-                                                 database='devops',
-                                                 user='root',
-                                                 password='ippon')
+            connection = mysql.connector.connect(host='185.224.137.214',
+                                                 database='u646551342_devops',
+                                                 user='u646551342_devops',
+                                                 password='devops')
             cursor = connection.cursor()
             try:
                 for automate in data:
