@@ -4,24 +4,31 @@ import time
 import random
 import os
 import socket
+import sys
 
 # id_unite = [os.getenv('UNITE')]
-id_unite = [1, 2, 3, 4, 5]
-starttime = time.time()
-id_automate = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Set number of 'unites' and 'automates'
+nb_unite = 5
+nb_automate = 10
+
+# Set 'automate' types available
 id_type_automate = ["0", "1", "2", "3", "4", "5",
                     "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+
+# Set date
+starttime = time.time()
 date = calendar.timegm(time.gmtime())
 
 while True:
 
-    for x in id_unite:
-        print(x)
+    for x in range(1, nb_unite + 1):
+        print('\nCreating file for "unite %s"' % x)
         name = "paramunite_"+str(x)+"_"+str(date)+".json"
         data = []
         date = calendar.timegm(time.gmtime())
 
-        for y in id_automate:
+        for y in range(1, nb_automate + 1):
             automate = {
                 "nb_unite": x,
                 "nb_automate": y,
@@ -43,10 +50,15 @@ while True:
         with open('jsonFiles/'+name, "w") as file:
             json.dump(data, file)
 
+        print('File %s created' % name)
+
+        print('Sending File to server')
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(("", 1111))
         s.send(name.encode())
         response = s.recv(100).decode()
         print(response)
+
+    print("\nNext files will be sent in 60 seconds")
 
     time.sleep(60.0 - ((time.time() - starttime) % 60.0))
