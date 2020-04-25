@@ -6,7 +6,7 @@ import os
 import socket
 import sys
 
-# id_unite = os.getenv('UNITE')
+id_unite = os.getenv('UNITE')
 
 # Set number of 'unites' and 'automates'
 nb_unite = 5
@@ -19,10 +19,10 @@ id_type_automate = ["0", "1", "2", "3", "4", "5",
 # Set date
 starttime = time.time()
 date = calendar.timegm(time.gmtime())
-
+time.sleep(10)
 while True:
 
-    for x in range(1, nb_unite + 1):
+    for x in id_unite:
         print('\nCreating file for "unite %s"' % x)
         name = "paramunite_"+str(x)+"_"+str(date)+".json"
         data = []
