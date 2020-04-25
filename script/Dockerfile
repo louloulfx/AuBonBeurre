@@ -9,5 +9,7 @@ RUN apt-get update \
         nano
 COPY server.py .
 COPY generate.py .
+COPY script.sh .
 
-CMD ["python", "./server.py"]
+RUN chmod a+x script.sh
+CMD ["./script.sh"]

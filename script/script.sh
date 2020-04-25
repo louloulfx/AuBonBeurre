@@ -1,5 +1,6 @@
 #!/bin/bash
 
-#set -e
-exec python3 -u /server.py &
-exec python3 -u /generate.py $1
+set -e
+
+exec python ./server.py
+exec python ./generate.py
