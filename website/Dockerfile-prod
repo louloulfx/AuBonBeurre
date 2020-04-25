@@ -1,0 +1,17 @@
+FROM node:12.2.0-alpine as build
+
+WORKDIR /website
+
+ENV PATH /website/node_modules/.bin:$PATH
+
+COPY package.json /home/camille/projet/AuBonBeurre/website/package.json
+RUN npm install
+RUN npm install @vue/cli@3.7.0 -g
+COPY . /website
+RUN npm run build
+
+#Server running
+FROM nginx:1.16.0-alpine
+COPY --from=build /website/dist /usr/share/nginx/html
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
