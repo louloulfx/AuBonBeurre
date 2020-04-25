@@ -18,9 +18,10 @@ def getDate(o):
 
 @app.route('/unites/all', methods=['GET'])
 def get_all_unites():
-    connection = mysql.connector.connect(host='185.224.137.214',
-                                         database='u646551342_devops',
-                                         user='u646551342_devops',
+    connection = mysql.connector.connect(host='mysql',
+                                         database='devops',
+                                         port='3306',
+                                         user='root',
                                          password='devops')
     cursor = connection.cursor()
     try:
@@ -50,9 +51,10 @@ def get_one_unites():
         id = int(request.args['id'])
     else:
         return "Error: No id field provided. Please specify an id."
-    connection = mysql.connector.connect(host='185.224.137.214',
-                                         database='u646551342_devops',
-                                         user='u646551342_devops',
+    connection = mysql.connector.connect(host='mysql',
+                                         database='devops',
+                                         port='3306',
+                                         user='root',
                                          password='devops')
     cursor = connection.cursor()
 
@@ -82,4 +84,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host='0.0.0.0')

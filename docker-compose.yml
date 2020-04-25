@@ -47,3 +47,9 @@ services:
     build: ./script/
     environment: 
       - UNITE=6
+  
+  back:
+    container_name: backend
+    build: ./back/
+    ports:
+      - "5000:5000"
