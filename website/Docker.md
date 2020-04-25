@@ -6,7 +6,7 @@ npm install
 ```
 ## create docker image
 ```
-docker build -f Dockerfile-prod -t website:prod
+docker build -f Dockerfile-prod -t website:prod .
 ```
 ## initialize nginx server with docker
 ```
