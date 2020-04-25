@@ -1,5 +1,17 @@
 version: '3'
 services:
+  mysql:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_DATABASE: 'devops'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'devops'
+      MYSQL_ROOT_PASSWORD: 'devops'
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./automates.sql:/docker-entrypoint-initdb.d/dump.sql
+
   unite1: 
     container_name: unite1
     build: ./script/

@@ -5,7 +5,6 @@ import json
 import mysql.connector
 from mysql.connector import Error
 
-
 class ClientThread(threading.Thread):
 
     def __init__(self, ip, port, clientsocket):
@@ -18,12 +17,13 @@ class ClientThread(threading.Thread):
     def run(self):
         r = self.clientsocket.recv(999999).decode()
         pathFile = pathlib.Path().joinpath(pathlib.Path().absolute(),
-                                           '/home/valentinguibert/Documents/Repos/AuBonBeurre/jsonFiles', r)
+                                           '/app/jsonFiles', r)
         with open(str(pathFile), 'rb') as json_file:
             data = json.load(json_file)
-            connection = mysql.connector.connect(host='185.224.137.214',
-                                                 database='u646551342_devops',
-                                                 user='u646551342_devops',
+            connection = mysql.connector.connect(host='mysql',
+                                                 database='devops',
+                                                 port='3306',
+                                                 user='root',
                                                  password='devops')
             cursor = connection.cursor()
             try:
