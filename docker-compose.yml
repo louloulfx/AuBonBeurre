@@ -53,3 +53,11 @@ services:
     build: ./back/
     ports:
       - "5000:5000"
+
+  website:
+    container_name: website
+    build:
+      context: ./website/
+      dockerfile: Dockerfile-prod
+    ports:
+      - '80:80'
