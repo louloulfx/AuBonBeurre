@@ -24,6 +24,9 @@ Pour commencer placer vous dans le dossier website et effectuer :
 npm install
 ```
 Ensuite revenez à la racine du projet et lancer les container:
+```
+docker-compose build
+```
   
 ```  
 docker-compose up 
