@@ -91,22 +91,26 @@ export default {
         this.label = [];
         let label = [];
         let newArray2 = [];
-        let newArray3 = [];
+        let newArray = [];
+        let timeVariable = 61;
         for (let k = 1; k < this.response.length; k++) {
           if (this.response[k][1] == j) {
             newArray2.push(this.response[k]);
           }
         }
-        for (let i = 0; i < 60; i++) {
-          if (newArray2[i] == null) {
-            alert("Pas assez de données ou pas de données");
-          } else {
-            label.push(i);
-            this.label.push(i);
-            newArray3.push(newArray2[i][dataPosition + 3]);
-          }
+        for (let l = 0; l < newArray2.length; l++) {
+          newArray.push(newArray2[l][dataPosition + 3]);
         }
-        this.automate.push(newArray3);
+        if (newArray.length < timeVariable) {
+          timeVariable = newArray.length;
+        }
+        for (let i = 0; i < timeVariable; i++) {
+          label.push(i);
+          this.label.push(i);
+        }
+        this.automate.push(
+          newArray.slice(newArray.length - timeVariable, newArray.length)
+        );
       }
 
       this.fillData();
