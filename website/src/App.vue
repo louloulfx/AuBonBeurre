@@ -18,7 +18,6 @@ export default {
 
 <style>
 body {
-  background: black;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
