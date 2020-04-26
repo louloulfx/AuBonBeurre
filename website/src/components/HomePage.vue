@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <router-link class="boxContainer" v-for="(numeroUnite, i) in numerosUnite" :key="i + 1" to="/stats">
+    <router-link class="boxContainer" v-for="(numeroUnite, i) in numerosUnite" :key="i + 1" v-bind:to="'/stats/' + numeroUnite">
       <div class="box">
         <p>Unité n°{{numeroUnite}}</p>
       </div>
