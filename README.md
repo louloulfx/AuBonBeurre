@@ -4,7 +4,7 @@ Ce projet est réalisé par :
 
 - Camille Guerin (Camilleguerin44)
 - Valentin Guibert (valentingbt)
-- Elouan Lafréchoux (louloulfx)
+- Elouan Lafréchoux (louloulfx, elouan.lafrechoux)
 
 ## Préambule  
   
