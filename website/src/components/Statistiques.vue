@@ -90,17 +90,23 @@ export default {
       for (let j = 1; j < this.automates.length + 1; j++) {
         this.label = [];
         let label = [];
-        let newArray = [];
-        for (let i = 1; i < 61; i++) {
-          for (let k = 1; k < this.response.length; k++) {
-              if(this.response[k][1] == j){
-                  newArray.push(this.response[k][dataPosition+3]);
-              }
+        let newArray2 = [];
+        let newArray3 = [];
+        for (let k = 1; k < this.response.length; k++) {
+          if (this.response[k][1] == j) {
+            newArray2.push(this.response[k]);
           }
-          label.push(i);
-          this.label.push(i);
         }
-        this.automate.push(newArray.slice(newArray.length - 60, newArray.lenght));
+        for (let i = 0; i < 60; i++) {
+          if (newArray2[i] == null) {
+            alert("Pas assez de données ou pas de données");
+          } else {
+            label.push(i);
+            this.label.push(i);
+            newArray3.push(newArray2[i][dataPosition + 3]);
+          }
+        }
+        this.automate.push(newArray3);
       }
 
       this.fillData();
