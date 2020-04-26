@@ -1,12 +1,7 @@
 <template>
   <div class="container">
     <div class="select">
-      <v-select
-        v-model="data1"
-        :options="['data1', 'data2', 'data3', 'data4', 'data5', 'data6']"
-        @input="random()"
-        :clearable="false"
-      ></v-select>
+      <v-select v-model="defaultData" :options="options" @input="request()" :clearable="false"></v-select>
     </div>
     <line-chart :styles="myStyles" :chart-data="datacollection" />
     <div class="button">
@@ -25,7 +20,7 @@
 }
 .select {
   cursor: pointer;
-  width: 200px;
+  width: 300px;
   align-self: flex-end;
   margin-bottom: 15px;
   margin-right: 50px;
@@ -57,32 +52,55 @@ export default {
   },
   data() {
     return {
-      data1: "data1",
+      id: this.$route.params.id,
+      defaultData: "Température cuve",
+      options: [
+        "Température cuve",
+        "Température extérieure",
+        "Poids du lait en cuve",
+        "Poids du produit fini réalisé",
+        "Mesure pH",
+        "Concentration de NaCl",
+        "Niveau bactérien salmonelle",
+        "Niveau bactérien E-coli",
+        "Niveau bactérien Listéria"
+      ],
       datacollection: null,
       label: [],
-      data: [],
       automates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      automate: []
+      automate: [],
+      response: []
     };
   },
   created() {
-    this.random();
+    this.axios
+      .get("http://localhost:5000/unites?id=" + this.id)
+      .then(response => {
+        this.response = response.data;
+        this.request();
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   methods: {
-    random() {
+    request() {
+      let dataPosition = this.options.indexOf(this.defaultData);
       this.automate = [];
-      for (let j = 0; j < this.automates.length; j++) {
-        this.data = [];
+      for (let j = 1; j < this.automates.length + 1; j++) {
         this.label = [];
         let label = [];
-        let data = [];
-        for (let i = 1; i < 61; i++) {
+        let newArray = [];
+        for (let i = 0; i < 10; i++) {
+          for (let k = 1; k < this.response.length; k++) {
+              if(this.response[k][1] == j){
+                  newArray.push(this.response[k][dataPosition+3]);
+              }
+          }
           label.push(i);
-          data.push(this.getRandomInt());
           this.label.push(i);
-          this.data.push(this.getRandomInt());
         }
-        this.automate.push(data);
+        this.automate.push(newArray.slice(newArray.length - 10, newArray.lenght));
       }
 
       this.fillData();
