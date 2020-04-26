@@ -2,9 +2,9 @@
 
 Ce projet est réalisé par : 
 
-- Camille Guerin
-- Valentin Guibert
-- Elouan Lafréchoux
+- Camille Guerin (Camilleguerin44)
+- Valentin Guibert (valentingbt)
+- Elouan Lafréchoux (louloulfx)
 
 ## Préambule  
   
