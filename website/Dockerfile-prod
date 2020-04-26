@@ -4,8 +4,6 @@ WORKDIR /website
 
 ENV PATH /website/node_modules/.bin:$PATH
 
-COPY package.json /home/camille/projet/AuBonBeurre/website/package.json
-RUN npm install
 COPY . /website
 RUN npm run build
 
