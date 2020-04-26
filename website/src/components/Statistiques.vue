@@ -91,7 +91,7 @@ export default {
         this.label = [];
         let label = [];
         let newArray = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i < 61; i++) {
           for (let k = 1; k < this.response.length; k++) {
               if(this.response[k][1] == j){
                   newArray.push(this.response[k][dataPosition+3]);
@@ -100,7 +100,7 @@ export default {
           label.push(i);
           this.label.push(i);
         }
-        this.automate.push(newArray.slice(newArray.length - 10, newArray.lenght));
+        this.automate.push(newArray.slice(newArray.length - 60, newArray.lenght));
       }
 
       this.fillData();
