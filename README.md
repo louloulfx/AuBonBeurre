@@ -9,7 +9,10 @@ Ce projet est réalisé par :
 ## Préambule  
   
 L'application est dockerisée. Elle est découpée en neufs containers : les unités qui effectuent le script python (6 unités), l'api qui permet ensuite au site web d'utiliser les données, la base de donnée mysql et le serveur web (Vuejs/Nginx).
-  
+
+## Schéma du projet
+![Schema](schema.png)
+
 ## Pré-requis  
   
 Installer docker / docker-compose /  net-tools
@@ -44,8 +47,8 @@ L'id du service se trouve avant le /nom_du_service
   
   ### Liens des outils
 
-Vous pouvez maintenant accéder à l'api à cette adresse: [localhost:5000](localhost:5000).
+Vous pouvez maintenant accéder à l'api à cette adresse: [localhost:5000](http://localhost:5000).
 
-Et au site web ici : [localhost:80](localhost:80).
+Et au site web ici : [localhost:80](http://localhost:80).
 
 Vous pouvez aussi installer mysql sur votre machine et avoir accès à la base de donnée accessible sur le port 3306.
