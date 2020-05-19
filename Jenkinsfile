@@ -8,11 +8,9 @@ pipeline {
                 }
             }
             steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'pip install pathlib'
-                    sh 'python -m py_compile script/server.py script/generate.py' 
-                    stash(name: 'compiled-results', includes: 'script/*.py*') 
-                }
+                sh 'pip install pathlib --user'
+                sh 'python -m py_compile script/server.py script/generate.py' 
+                stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
         stage('Test') {
