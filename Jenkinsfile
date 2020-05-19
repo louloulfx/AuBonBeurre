@@ -8,9 +8,11 @@ pipeline {
                 }
             }
             steps {
-                sh 'virtualenv venv && . venv/bin/activate && pip install pathlib'
-                sh 'python -m py_compile script/server.py script/generate.py' 
-                stash(name: 'compiled-results', includes: 'script/*.py*') 
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'virtualenv venv && . venv/bin/activate && pip install pathlib'
+                    sh 'python -m py_compile script/server.py script/generate.py' 
+                    stash(name: 'compiled-results', includes: 'script/*.py*') 
+                }
             }
         }
         stage('Test') {
