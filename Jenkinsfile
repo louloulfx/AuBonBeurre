@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install --upgrade pip'
+                sh 'easy_install pathlib'
                 sh 'python -m py_compile script/server.py script/generate.py' 
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
