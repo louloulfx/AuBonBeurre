@@ -8,7 +8,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip3 install pathlib --user'
+                sh 'source /anaconda3/bin/activate'
+                sh 'pip install pathlib --user'
                 sh 'python -m py_compile script/server.py script/generate.py' 
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
