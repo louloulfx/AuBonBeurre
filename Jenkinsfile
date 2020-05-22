@@ -8,9 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python3 -m venv env'
-                sh 'source ./env/bin/activate'
-                sh 'python -m pip install pathlib'
+                sh 'python3.7 -m pip install pathlib'
                 sh 'python -m py_compile script/server.py script/generate.py' 
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
