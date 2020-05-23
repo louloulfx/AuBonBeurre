@@ -8,7 +8,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install -r requirements.txt'
 		        sh 'virtualenv -p /usr/bin/python3 venv'
 		        sh 'source venv/bin/activate && pip install -r requirements.txt'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
