@@ -9,6 +9,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'sudo pip install pathlib'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
