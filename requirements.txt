@@ -1,1 +1,1 @@
-pathlib==3.4
+pathlib==2.7
