@@ -8,8 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python3.7 -m pip install pathlib'
-                sh 'python -m py_compile script/server.py script/generate.py' 
+                sh 'pip install -r requirements.txt'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
