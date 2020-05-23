@@ -9,6 +9,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'pip install pathlib'
 		        sh 'pip install --user -r requirements.txt'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
