@@ -9,7 +9,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'sudo pip install pathlib'
+                sh 'pip install pathlib'
+                sh 'python -m py_compile script/generate.py script/server.py'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
