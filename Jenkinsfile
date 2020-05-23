@@ -9,7 +9,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install pathlib3'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
