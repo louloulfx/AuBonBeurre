@@ -9,6 +9,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'pip install pathlib3'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
@@ -19,7 +20,6 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install pathlib'
                 sh 'py.test --junit-xml test-reports/results.xml script/server.py'
             }
             post {
