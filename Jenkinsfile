@@ -9,7 +9,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install pathlib'
+                sh 'pip install mysql-connector-python'
                 sh 'python -m py_compile script/generate.py script/server.py'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
