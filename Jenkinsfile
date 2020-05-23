@@ -8,8 +8,6 @@ pipeline {
                 }
             }
             steps {
-		        sh 'virtualenv -p /usr/bin/python3 venv'
-		        sh 'source venv/bin/activate && pip install -r requirements.txt'
                 stash(name: 'compiled-results', includes: 'script/*.py*') 
             }
         }
@@ -20,7 +18,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'py.test --junit-xml test-reports/results.xml script/server.py'
+                withEnv(["HOME=$(env.WORKSPACE}"]) {
+		            sh 'pip install --user -r requirements.txt'
+                    sh 'py.test --junit-xml test-reports/results.xml script/server.py'
+                }
             }
             post {
                 always {
