@@ -7,6 +7,9 @@ import socket
 import sys
 
 id_unite = os.getenv('UNITE')
+print(id_unite)
+if id_unite == None :
+    id_unite = [1,2,3,4,5]
 
 # Set number of 'unites' and 'automates'
 nb_unite = 5

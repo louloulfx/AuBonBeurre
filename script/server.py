@@ -1,8 +1,8 @@
 import socket
 import threading
-import pathlib
 import json
 import mysql.connector
+import pathlib
 from mysql.connector import Error
 
 class ClientThread(threading.Thread):
